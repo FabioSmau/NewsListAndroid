@@ -2,7 +2,7 @@ package com.newslist
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.newslist.ui.main.NewsFragment
+import com.newslist.ui.news.NewsFragment
 
 class NewsActivity : AppCompatActivity() {
 
