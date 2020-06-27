@@ -1,4 +1,4 @@
-package com.newslist.ui.news
+package com.newslist.news
 
 interface NewsRepository {
     fun getNews()

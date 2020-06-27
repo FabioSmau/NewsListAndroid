@@ -1,4 +1,4 @@
-package com.newslist.ui.news
+package com.newslist.news
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,7 +14,13 @@ class NewsFragment : Fragment() {
         fun newInstance() = NewsFragment()
     }
 
-    private val viewModel : NewsViewModel by viewModels{ ViewModelCreator {NewsViewModel(NewsRepository.create())} }
+    private val viewModel : NewsViewModel by viewModels{
+        ViewModelCreator {
+            NewsViewModel(
+                NewsRepository.create()
+            )
+        }
+    }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
