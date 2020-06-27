@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 
 val newsModule = module {
     viewModel { NewsViewModel(get()) }
-    single<NewsRepository> { RemoteNewsRepository(get(), get()) }
+    single<NewsRepository> { NewsRemoteRepository(get(), get()) }
     factory { provideNewsAPI(get()) }
     single<DispatcherProvider> { DispatcherDefaultProvider() }
 }

@@ -3,7 +3,7 @@ package com.newslist.news
 import com.newslist.base.DispatcherProvider
 import kotlinx.coroutines.withContext
 
-class RemoteNewsRepository(private val api: NewsAPI, private val dispatcher: DispatcherProvider) :
+class NewsRemoteRepository(private val api: NewsAPI, private val dispatcher: DispatcherProvider) :
     NewsRepository {
     override suspend fun getNews(): Result<List<News>> {
         return withContext(dispatcher.io()) {
