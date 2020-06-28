@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NewsList</string>
+    <string name="news_empty_list">Nenhum item disponível no momento</string>
 </resources>
