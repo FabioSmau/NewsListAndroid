@@ -8,7 +8,7 @@ fun ImageView.loadImage(url: String?) {
         Glide
             .with(this.context)
             .load(it)
-            .centerCrop()
+            .centerInside()
             .error(android.R.drawable.stat_notify_error)
             .into(this)
     }

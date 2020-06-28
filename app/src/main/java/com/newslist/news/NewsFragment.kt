@@ -25,12 +25,17 @@ class NewsFragment : Fragment(R.layout.news_list_fragment) {
         super.onViewCreated(view, savedInstanceState)
         lifecycle.addObserver(newsViewModel)
         setupRecyclerView()
+        setupSwipeToRefresh()
         setupViewModel()
     }
 
     private fun setupRecyclerView() {
         recycler_news.adapter = adapter
         recycler_news.layoutManager = LinearLayoutManager(context)
+    }
+
+    private fun setupSwipeToRefresh() {
+        swipe_to_refresh.setOnRefreshListener { newsViewModel.loadNews() }
     }
 
     private fun setupViewModel() {
@@ -46,12 +51,12 @@ class NewsFragment : Fragment(R.layout.news_list_fragment) {
     }
 
     private fun showLoading() {
-        progress_loading.visibility = View.VISIBLE
+        swipe_to_refresh.isRefreshing = true
         recycler_news.visibility = View.GONE
     }
 
     private fun hideLoading() {
-        progress_loading.visibility = View.GONE
+        swipe_to_refresh.isRefreshing = false
         recycler_news.visibility = View.VISIBLE
     }
 

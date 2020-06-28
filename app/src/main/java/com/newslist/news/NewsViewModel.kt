@@ -10,7 +10,7 @@ class NewsViewModel(private val repository: NewsRepository) : ViewModel(), Lifec
     private val viewAction = MutableLiveData<ViewAction>()
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun start() {
+    fun loadNews() {
         viewAction.value = ViewAction.Loading
         viewModelScope.launch {
             repository.getNews().onSuccess {
