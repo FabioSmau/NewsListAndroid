@@ -1,4 +1,4 @@
-package com.newslist.base
+package com.newslist.common
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
