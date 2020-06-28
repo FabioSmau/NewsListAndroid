@@ -1,6 +1,6 @@
 package com.newslist.news.repository
 
-import com.newslist.base.DispatcherProvider
+import com.newslist.common.DispatcherProvider
 import kotlinx.coroutines.withContext
 import java.io.IOException
 
@@ -9,8 +9,8 @@ class NewsRemoteRepository(private val api: NewsAPI, private val dispatcher: Dis
 
     override suspend fun getNews(): Result<NewsResponse> =
         withContext(dispatcher.io()) {
-            val response = api.getNews().await()
             try {
+                val response = api.getNews().await()
                 if (response.isSuccessful) {
                     Result.success(response.body()!!)
                 } else {

@@ -1,7 +1,7 @@
 package com.newslist.news
 
-import com.newslist.base.DispatcherDefaultProvider
-import com.newslist.base.DispatcherProvider
+import com.newslist.common.DispatcherDefaultProvider
+import com.newslist.common.DispatcherProvider
 import com.newslist.news.repository.NewsAPI
 import com.newslist.news.repository.NewsRemoteRepository
 import com.newslist.news.repository.NewsRepository
