@@ -2,6 +2,7 @@ package com.newslist.news
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.newslist.news.repository.NewsRepository
 import kotlinx.coroutines.launch
 
 class NewsViewModel(private val repository: NewsRepository) : ViewModel(), LifecycleObserver {

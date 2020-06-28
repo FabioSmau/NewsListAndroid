@@ -4,7 +4,7 @@ import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
-const val baseUrl = "https://api.geste.com"
+const val baseUrl = "https://newsapi.org"
 
 val networkingModule = module {
 
