@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.newslist.R
-import com.newslist.news.recycler.NewsContentConverter
+import com.newslist.news.recycler.NewsContentFactory
 import com.newslist.news.recycler.NewsRecyclerAdapter
 import com.newslist.news.repository.Article
 import kotlinx.android.synthetic.main.news_list_fragment.*
@@ -39,13 +39,11 @@ class NewsFragment : Fragment(R.layout.news_list_fragment) {
     }
 
     private fun setupViewModel() {
-        newsViewModel.observeViewAction(this, Observer { viewAction ->
+        newsViewModel.getViewState().observe(viewLifecycleOwner, Observer { viewAction ->
             when (viewAction) {
                 is NewsViewModel.ViewAction.Loading -> showLoading()
-                is NewsViewModel.ViewAction.NewsLoaded -> {
-                    hideLoading()
-                    updateRecyclerView(viewAction.articles)
-                }
+                is NewsViewModel.ViewAction.Error -> setupEmptyState()
+                is NewsViewModel.ViewAction.NewsLoaded -> setupLoadedState(viewAction.articles)
             }
         })
     }
@@ -60,8 +58,14 @@ class NewsFragment : Fragment(R.layout.news_list_fragment) {
         recycler_news.visibility = View.VISIBLE
     }
 
-    private fun updateRecyclerView(article: List<Article>) {
-        adapter.update(NewsContentConverter.convert(article))
+    private fun setupEmptyState() {
+        hideLoading()
+        adapter.update(NewsContentFactory.empty())
+    }
+
+    private fun setupLoadedState(article: List<Article>) {
+        hideLoading()
+        adapter.update(NewsContentFactory.create(article))
     }
 }
 
