@@ -2,9 +2,9 @@ package com.newslist.news.recycler
 
 import com.newslist.news.repository.Article
 
-object NewsContentConverter {
+object NewsContentFactory {
 
-    fun convert(article: List<Article>): List<NewsContent> {
+    fun create(article: List<Article>): List<NewsContent> {
         if (article.isEmpty()) {
             return listOf(EmptyNewsHolder())
         }
@@ -20,6 +20,5 @@ object NewsContentConverter {
         return newsContent
     }
 
-
-
+    fun empty() = listOf<NewsContent>(EmptyNewsHolder())
 }

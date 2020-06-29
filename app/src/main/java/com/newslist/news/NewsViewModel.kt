@@ -7,24 +7,25 @@ import kotlinx.coroutines.launch
 
 class NewsViewModel(private val repository: NewsRepository) : ViewModel(), LifecycleObserver {
 
-    private val viewAction = MutableLiveData<ViewAction>()
+    private val viewState = MutableLiveData<ViewAction>()
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun loadNews() {
-        viewAction.value = ViewAction.Loading
         viewModelScope.launch {
+            viewState.value = ViewAction.Loading
             repository.getNews().onSuccess {
-                viewAction.value = ViewAction.NewsLoaded(it.articles)
+                viewState.value = ViewAction.NewsLoaded(it.articles)
             }.onFailure {
-                viewAction.value = ViewAction.NewsLoaded(emptyList())
+                viewState.value = ViewAction.Error
             }
         }
     }
 
-    fun observeViewAction(owner: LifecycleOwner, observer: Observer<ViewAction>) = viewAction.observe(owner, observer)
+    fun getViewState(): LiveData<ViewAction> = viewState
 
     sealed class ViewAction {
         object Loading : ViewAction()
+        object Error: ViewAction()
         class NewsLoaded(val articles: List<Article>) : ViewAction()
     }
 }
